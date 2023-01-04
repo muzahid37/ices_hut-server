@@ -6,7 +6,7 @@ const User = require("../models/User");
 router.get("/authTest", (req, res) => {
   res.send("auth test is successfull ");
 });
-
+// register
 router.post("/register", async (req, res) => {
   const newUser = new User({
     username: req.body.username,
@@ -51,25 +51,10 @@ router.post("/login", async (req, res) => {
 
     const { password, ...others } = user._doc;
 
-    res.status(200).json({ ...others, accesstoken });
+    res.status(200).json({ others, accesstoken });
   } catch (err) {
     res.status(500).json(err);
   }
 });
-// try{
-//     const user = await User.findOne(
-//         {
-//             userName: req.body.user_name
-//         }
-//     );
-
-//     !user && res.status(401).json("Wrong User Name");
-
-//     const hashedPassword = CryptoJS.AES.decrypt(
-//         user.password,
-//         process.env.PASS_SEC
-//     );
-
-//     const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
 module.exports = router;
